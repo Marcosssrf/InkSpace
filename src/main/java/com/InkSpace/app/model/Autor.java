@@ -1,5 +1,6 @@
 package com.InkSpace.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,7 @@ public class Autor {
 	private String nome;
 	private String sobrenome;
 
-	@ManyToMany
-	@JoinTable(name = "livro_autor",
-			joinColumns = @JoinColumn(name = "livro_id"),
-			inverseJoinColumns = @JoinColumn(name = "autor_id")
-	)
+	@ManyToMany(mappedBy = "autores")
+	@JsonIgnoreProperties("autores")
 	private Set<Livro> livros = new HashSet<>();
 }

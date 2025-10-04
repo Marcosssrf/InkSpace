@@ -1,5 +1,6 @@
 package com.InkSpace.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,17 +23,25 @@ public class Livro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
-
-	@ManyToMany
-	@JoinTable(name = "livro_categoria",
-			joinColumns = @JoinColumn(name = "livro_id"),
-			inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	private Set<Categoria> categorias = new HashSet<>();
 	private LocalDate dataPublicacao;
 	private Integer copias;
 
-	@ManyToMany(mappedBy = "livros")
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(
+			name = "livro_autor",
+			joinColumns = @JoinColumn(name = "livro_id"),
+			inverseJoinColumns = @JoinColumn(name = "autor_id")
+	)
+	@JsonIgnoreProperties("livros")
 	private Set<Autor> autores = new HashSet<>();
-}
 
-//claudio.damasceno@uniube.br
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(
+			name = "livro_categoria",
+			joinColumns = @JoinColumn(name = "livro_id"),
+			inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private Set<Categoria> categorias = new HashSet<>();
+
+
+}

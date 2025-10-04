@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AutorService {
@@ -17,36 +18,38 @@ public class AutorService {
 	public AutorService(AutorRepository autorRepository) {
 		this.autorRepository = autorRepository;
 	}
+//	//UPDATE
+//	public Autor findPorId(Integer id) {
+//		return autorRepository.findPorId(id);
+//	}
+//	public Autor update(Autor autor, Integer id) {
+//		Autor autor1 = findPorId(id);
+//		if (autor1 == null) {
+//			throw new EntityNotFoundException("Usuario não encontrado!");
+//		}
+//		if (autor.getNome() != null){
+//			autor1.setNome(autor.getNome());
+//		}
+//		if(autor.getSobrenome() != null){
+//			autor1.setSobrenome(autor.getSobrenome());
+//		}
+//		return autorRepository.save(autor1);
+//}
 
-	//GET
-	public List<Autor> getAll(){
+	public List<Autor> buscarTodos() {
 		return autorRepository.findAll();
 	}
-	//POST
-	public Autor save(Autor autor){
-		return autorRepository.save(autor);
-	}
-	//DELETE
-	public void delete(Integer id){
-		autorRepository.deleteById(id);
-	}
-	//UPDATE
-	public Autor findPorId(Integer id) {
-		return autorRepository.findPorId(id);
+
+	public Optional<Autor> buscarPorId(Integer id) {
+		return autorRepository.findById(id);
 	}
 
-	public Autor update(Autor autor, Integer id) {
-		Autor autor1 = findPorId(id);
-		if (autor1 == null) {
-			throw new EntityNotFoundException("Usuario não encontrado!");
-		}
-		if (autor.getNome() != null){
-			autor1.setNome(autor.getNome());
-		}
-		if(autor.getSobrenome() != null){
-			autor1.setSobrenome(autor.getSobrenome());
-		}
-		return autorRepository.save(autor1);
+	public Autor criarAutor(Autor autor) {
+		return autorRepository.save(autor);
+	}
+
+	public void deletarAutor(Integer id) {
+		autorRepository.deleteById(id);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.InkSpace.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome_categoria;
-
 	@ManyToMany(mappedBy = "categorias")
+	@JsonIgnoreProperties("categorias")
 	private Set<Livro> livros = new HashSet<>();
 }
