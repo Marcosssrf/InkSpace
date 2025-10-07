@@ -1,0 +1,389 @@
+/* ==========================================================================
+   1. ESTILOS GLOBAIS E DE BASE
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #faf3e0;
+    color: #352d2d;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3 {
+    color: #352d2d;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: #8a6d59;
+}
+
+/* ==========================================================================
+   2. LAYOUT PRINCIPAL (Header, Main, Footer, Container)
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.page-header, .page-footer {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 15px 30px;
+}
+
+.page-header { display: flex; justify-content: space-between; align-items: center; }
+.header-logo img { max-height: 50px; }
+.header-nav a { margin-left: 20px; font-weight: 500; transition: color 0.2s; }
+.header-nav a:hover { color: #352d2d; }
+
+.page-footer, .main-footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+    margin-top: auto;
+    padding: 20px 0;
+}
+
+/* ==========================================================================
+   3. PÁGINA INDEX (Dashboard)
+   ========================================================================== */
+
+.main-header {
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+}
+
+.main-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.welcome-title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #8a6d59;
+}
+
+.welcome-subtitle {
+    font-size: 1.1em;
+    color: #5a4a4a;
+    margin-bottom: 30px;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.dashboard-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ==========================================================================
+   4. FORMULÁRIOS
+   ========================================================================== */
+
+.form-container {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #352d2d;
+    background-color: #fdfaf3;
+}
+
+input:focus {
+    border-color: #b68973;
+    outline: none;
+    box-shadow: 0 0 5px rgba(182, 137, 115, 0.5);
+}
+
+form small {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8a6d59;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #6d5645;
+}
+
+.error-message {
+    color: #c0392b;
+    font-size: 0.9em;
+    display: block;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* ==========================================================================
+   5. TABELAS (Páginas de Lista)
+   ========================================================================== */
+
+.list-card {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.list-header h1 {
+    margin: 0;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0d8c7;
+}
+
+.data-table thead th {
+    background-color: #f7f2e8;
+    font-weight: 600;
+}
+
+.data-table tbody tr:nth-of-type(even) {
+    background-color: #fdfaf3;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f3eae0;
+}
+
+.action-link {
+    font-weight: 500;
+    margin-right: 15px;
+    transition: opacity 0.2s;
+}
+.action-link:hover { opacity: 0.7; }
+.action-link.delete { color: #c0392b; }
+
+.empty-message {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+/* ==========================================================================
+   6. BOTÕES (Unificados)
+   ========================================================================== */
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.button.primary, .card-button:not(.secondary) {
+    background-color: #8a6d59;
+    color: white;
+}
+.button.primary:hover, .card-button:not(.secondary):hover {
+    background-color: #6d5645;
+}
+
+.button.secondary, .card-button.secondary {
+    background-color: #e0d8c7;
+    color: #6d5645;
+}
+.button.secondary:hover, .card-button.secondary:hover {
+    background-color: #c4b9a9;
+    color: #352d2d;
+}
+
+/* ==========================================================================
+   7. BIBLIOTECA SELECT2
+   ========================================================================== */
+
+.select2-container--default .select2-selection--multiple {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fdfaf3;
+    min-height: 48px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 7px;
+    border: none;
+    outline: none;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #b68973;
+    outline: none;
+    box-shadow: 0 0 5px rgba(182, 137, 115, 0.5);
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    max-width: calc(100% - 10px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    margin-top: 5px !important;
+    padding: 3px 5px 3px 10px;
+    background-color: #e0d8c7;
+    border: 1px solid #b68973;
+    border-radius: 6px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    margin-left: auto;
+    padding-left: 8px;
+    flex-shrink: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #8a6d59;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #352d2d;
+}
+
+.select2-dropdown {
+    border: 1px solid #b68973;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #e0d8c7;
+    color: #352d2d;
+}
+
+.select2-container--default .select2-results__option--selected {
+    background-color: #d4c7b8;
+}
+.select2-container {
+    width: 100% !important;
+    box-sizing: border-box;
+}

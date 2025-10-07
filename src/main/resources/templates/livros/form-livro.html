@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="form-container">
+        <h1>Cadastrar Novo Livro</h1>
+
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <form th:action="@{/livros/salvar}" th:object="${livro}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <label for="titulo">Título:</label>
+            <input type="text" th:field="*{titulo}" required>
+            <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="error-message"></span>
+
+            <label for="dataPublicacao">Data de Publicação:</label>
+            <input type="date" th:field="*{dataPublicacao}" required>
+            <span th:if="${#fields.hasErrors('dataPublicacao')}" th:errors="*{dataPublicacao}" class="error-message"></span>
+
+            <label for="copias">Cópias:</label>
+            <input type="number" th:field="*{copias}" required min="0">
+            <span th:if="${#fields.hasErrors('copias')}" th:errors="*{copias}" class="error-message"></span>
+
+            <label for="autores">Autor(es):</label>
+            <select id="autores" th:field="*{autores}" multiple required>
+                <option th:each="autor : ${todosOsAutores}"
+                        th:value="${autor.id}"
+                        th:text="${autor.nome} + ' ' + ${autor.sobrenome}">
+                </option>
+            </select>
+            <small>Busque ou selecione um ou mais autores.</small>
+            <span th:if="${#fields.hasErrors('autores')}" th:errors="*{autores}" class="error-message"></span>
+
+            <label for="categorias">Categoria(s):</label>
+            <select id="categorias" th:field="*{categorias}" multiple required >
+                <option th:each="categoria : ${todasAsCategorias}"
+                        th:value="${categoria.id}"
+                        th:text="${categoria.nomeCategoria}">
+                </option>
+            </select>
+            <small>Busque ou selecione uma ou mais categorias.</small>
+            <span th:if="${#fields.hasErrors('categorias')}" th:errors="*{categorias}" class="error-message"></span>
+
+            <button type="submit">Salvar Livro</button>
+        </form>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#autores').select2({
+            placeholder: "Busque e selecione um ou mais autores",
+            allowClear: true
+        });
+
+        $('#categorias').select2({
+            placeholder: "Busque e selecione uma ou mais categorias",
+            allowClear: true
+        });
+    });
+</script>
+
+</body>
+</html>

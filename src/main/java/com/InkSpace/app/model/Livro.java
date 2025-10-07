@@ -1,7 +1,9 @@
 package com.InkSpace.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,24 +26,19 @@ public class Livro {
 	private Integer id;
 	private String titulo;
 	private LocalDate dataPublicacao;
+	@Min(value = 0, message = "O número de cópias não pode ser negativo.")
 	private Integer copias;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(
-			name = "livro_autor",
-			joinColumns = @JoinColumn(name = "livro_id"),
-			inverseJoinColumns = @JoinColumn(name = "autor_id")
-	)
+	@JoinTable()
+//	@JsonManagedReference
 	@JsonIgnoreProperties("livros")
 	private Set<Autor> autores = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(
-			name = "livro_categoria",
-			joinColumns = @JoinColumn(name = "livro_id"),
-			inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
+	@JoinTable()
+//	@JsonManagedReference
+	@JsonIgnoreProperties("livros")
 	private Set<Categoria> categorias = new HashSet<>();
-
 
 }

@@ -1,17 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bem-vindo à Biblioteca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InkSpace</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Sistema de Biblioteca</h1>
-<p>Deseja adicionar um novo membro?</p>
 
-<a th:href="@{/membros/novo}">SIM! Adicionar Membro</a>
+<header class="main-header">
+    <div class="logo-container">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca" class="main-logo">
+    </div>
+    <h1 class="welcome-title">Bem-vindo a InkSpace</h1>
+    <p class="welcome-subtitle">Selecione uma opção para gerenciar:</p>
+</header>
+
+<main class="dashboard-container">
+    <div class="dashboard-card">
+        <span class="card-icon">📚</span>
+        <h2>Livros</h2>
+        <div class="card-actions">
+            <a th:href="@{/livros/lista}" class="button card-button">Ver Lista</a>
+            <a th:href="@{/livros/novo}" class="button card-button secondary">Cadastrar Novo</a>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <span class="card-icon">🧑‍🤝‍🧑</span>
+        <h2>Membros</h2>
+        <div class="card-actions">
+            <a th:href="@{/membros/lista}" class="button card-button">Ver Lista</a>
+            <a th:href="@{/membros/novo}" class="button card-button secondary">Cadastrar Novo</a>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <span class="card-icon">✍️</span>
+        <h2>Autores</h2>
+        <div class="card-actions">
+            <a th:href="@{/autores/lista}" class="button card-button">Ver Lista</a>
+            <a th:href="@{/autores/novo}" class="button card-button secondary">Cadastrar Novo</a>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <span class="card-icon">🏷️</span>
+        <h2>Categorias</h2>
+        <div class="card-actions">
+            <a th:href="@{/categorias/lista}" class="button card-button">Ver Lista</a>
+            <a th:href="@{/categorias/novo}" class="button card-button secondary">Cadastrar Novo</a>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <span class="card-icon"> 📤 </span>
+        <h2>Empréstimos</h2>
+        <div class="card-actions">
+            <a th:href="@{/emprestimos/lista}" class="button card-button">Ver Lista</a>
+            <a th:href="@{/emprestimos/novo}" class="button card-button secondary">Novo Empréstimo</a>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+</footer>
 
 </body>
 </html>

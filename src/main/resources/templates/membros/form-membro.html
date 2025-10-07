@@ -2,23 +2,56 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Membro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Cadastrar Novo Membro</h1>
-<form th:action="@{/membros/salvar}" th:object="${membro}" method="post">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required><br><br>
 
-    <label for="sobrenome">Sobrenome:</label>
-    <input type="text" id="sobrenome" name="sobrenome" required><br><br>
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+    </nav>
+</header>
 
-    <label for="data_entrada">Data de Entrada:</label>
-    <input type="date" id="data_entrada" name="data_entrada" required><br><br>
+<main class="container">
+    <div class="form-container">
+        <h1>Cadastrar Novo Membro</h1>
 
-    <label for="status">Status:</label>
-    <input type="text" id="status" name="status_id" required><br><br>
-    <button type="submit">Salvar</button>
-</form>
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <form th:action="@{/membros/salvar}" th:object="${membro}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="nome">Nome:</label>
+            <input type="text" th:field="*{nome}" required>
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" th:field="*{sobrenome}" required>
+            <span th:if="${#fields.hasErrors('sobrenome')}" th:errors="*{sobrenome}" class="error-message"></span>
+
+            <label for="dataEntrada">Data de Entrada:</label>
+            <input type="date" th:field="*{dataEntrada}" required>
+            <span th:if="${#fields.hasErrors('dataEntrada')}" th:errors="*{dataEntrada}" class="error-message"></span>
+
+            <label for="statusId">Status:</label>
+            <input type="text" th:field="*{statusId}" required>
+            <span th:if="${#fields.hasErrors('statusId')}" th:errors="*{statusId}" class="error-message"></span>
+
+            <button type="submit">Salvar Membro</button>
+        </form>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+</footer>
+
 </body>
 </html>

@@ -1,43 +1,48 @@
 package com.InkSpace.app.controller;
 
 import com.InkSpace.app.model.Categoria;
-import com.InkSpace.app.service.CategoriaService;
+import com.InkSpace.app.repository.CategoriaRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/categorias")
 @RequiredArgsConstructor
 public class CategoriaController {
 
-	private final CategoriaService categoriaService;
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
-	@GetMapping
-	public ResponseEntity<List<Categoria>> getAll(){
-		List<Categoria> categorias = new ArrayList<>();
-		categorias = categoriaService.getAll();
-		return ResponseEntity.ok(categorias);
+	@GetMapping("/novo")
+	public String mostrarFormularioDeCadastro(Model model) {
+		model.addAttribute("categoria", new Categoria());
+		return "categorias/form-categoria";
 	}
 
-	@PostMapping
-	public ResponseEntity<Categoria> create(@RequestBody Categoria categorias){
-		categoriaService.save(categorias);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categorias.getId()).toUri();
-		return ResponseEntity.created(uri).body(categorias);
+	@PostMapping("/salvar")
+	public String salvarCategoria(@Valid @ModelAttribute("categoria") Categoria categoria, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			return "categorias/form-categoria";
+		}
+
+		categoriaRepository.save(categoria);
+		redirectAttributes.addFlashAttribute("sucesso", "Categoria salva com sucesso!");
+		return "redirect:/categorias/lista";
 	}
 
-	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Integer id){
-		categoriaService.delete(id);
+	@GetMapping("/lista")
+	public String listarCategorias(Model model) {
+		model.addAttribute("categorias", categoriaRepository.findAll());
+		return "categorias/lista-categoria";
 	}
 
 }

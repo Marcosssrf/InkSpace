@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Categoria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="form-container">
+        <h1>Cadastrar Nova Categoria</h1>
+
+        <form th:action="@{/categorias/salvar}" th:object="${categoria}" method="post">
+            <label for="nomeCategoria">Nome da Categoria:</label>
+            <input type="text" th:field="*{nomeCategoria}" required>
+            <span th:if="${#fields.hasErrors('nomeCategoria')}" th:errors="*{nomeCategoria}" class="error-message"></span>
+
+            <button type="submit">Salvar Categoria</button>
+        </form>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+</footer>
+
+</body>
+</html>

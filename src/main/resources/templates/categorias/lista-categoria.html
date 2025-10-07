@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Autores</title>
+    <title>Lista de Categorias</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -16,6 +16,7 @@
         <a th:href="@{/livros/lista}">Livros</a>
         <a th:href="@{/membros/lista}">Membros</a>
         <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
     </nav>
 </header>
@@ -23,44 +24,36 @@
 <main class="container">
     <div class="list-card">
         <div class="list-header">
-            <h1>Autores Cadastrados</h1>
-            <a th:href="@{/autores/novo}" class="button primary">Cadastrar Novo Autor</a>
+            <h1>Categorias Cadastradas</h1>
+            <a th:href="@{/categorias/novo}" class="button primary">Cadastrar Nova Categoria</a>
         </div>
 
         <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
 
-        <div th:if="${!autores.isEmpty()}">
+        <div th:if="${!categorias.isEmpty()}">
             <table class="data-table">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
+                    <th>Nome da Categoria</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="autor : ${autores}">
-                    <td th:text="${autor.id}">1</td>
-                    <td th:text="${autor.nome}">Machado</td>
-                    <td th:text="${autor.sobrenome}">de Assis</td>
+                <tr th:each="categoria : ${categorias}">
+                    <td th:text="${categoria.id}">1</td>
+                    <td th:text="${categoria.nomeCategoria}">Romance</td>
                     <td>
-                        <a th:href="@{/autores/editar/{id}(id=${autor.id})}" class="action-link">
-                            Editar
-                        </a>
-                        <a th:href="@{/autores/deletar/{id}(id=${autor.id})}"
-                           class="action-link delete"
-                           onclick="return confirm('Tem certeza que deseja excluir este autor?');">
-                            Excluir
-                        </a>
+                        <a href="#" class="action-link">Editar</a>
+                        <a href="#" class="action-link delete">Excluir</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div th:if="${autores.isEmpty()}">
-            <p class="empty-message">Nenhum autor cadastrado ainda.</p>
+        <div th:if="${categorias.isEmpty()}">
+            <p class="empty-message">Nenhuma categoria cadastrada ainda.</p>
         </div>
     </div>
 </main>

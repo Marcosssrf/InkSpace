@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="list-card">
+        <div class="list-header">
+            <h1>Acervo de Livros</h1>
+            <a th:href="@{/livros/novo}" class="button primary">Cadastrar Novo Livro</a>
+        </div>
+
+        <div th:if="${!livros.isEmpty()}">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Autor(es)</th>
+                    <th>Categorias</th>
+                    <th>Publicação</th>
+                    <th>Cópias</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="livro : ${livros}">
+                    <td th:text="${livro.id}"></td>
+                    <td th:text="${livro.titulo}">Dom Casmurro</td>
+
+                    <td>
+                                <span th:each="autor, iterStat : ${livro.autores}" th:text="${autor.nome} + ' ' + ${autor.sobrenome} + (${!iterStat.last} ? ', ' : '')">
+                                    Machado de Assis
+                                </span>
+                    </td>
+
+                    <td>
+                                <span th:each="categoria, iterStat : ${livro.categorias}" th:text="${categoria.nomeCategoria} + (${!iterStat.last} ? ', ' : '')">
+                                    Romance
+                                </span>
+                    </td>
+
+                    <td th:text="${#temporals.format(livro.dataPublicacao, 'yyyy')}">1899</td>
+                    <td th:text="${livro.copias}">10</td>
+                    <td>
+                        <a th:href="@{/livros/editar/{id}(id=${livro.id})}" class="action-link">
+                            Editar
+                        </a>
+
+                        <a th:href="@{/livros/deletar/{id}(id=${livro.id})}"
+                           class="action-link delete"
+                           onclick="return confirm('Tem certeza que deseja excluir este livro?');">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${livros.isEmpty()}">
+            <p class="empty-message">Nenhum livro cadastrado ainda.</p>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+</footer>
+
+</body>
+</html>

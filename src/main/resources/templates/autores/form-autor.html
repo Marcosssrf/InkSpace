@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Autor</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="page-header">
+</header>
+
+<main class="container">
+    <div class="form-container">
+        <h1>Cadastrar Novo Autor</h1>
+
+        <form th:action="@{/autores/salvar}" th:object="${autor}" method="post">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="nome">Nome:</label>
+            <input type="text" th:field="*{nome}" required>
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" th:field="*{sobrenome}" required>
+            <span th:if="${#fields.hasErrors('sobrenome')}" th:errors="*{sobrenome}" class="error-message"></span>
+
+            <button type="submit">Salvar Autor</button>
+        </form>
+    </div>
+</main>
+
+<footer class="page-footer">
+</footer>
+
+</body>
+</html>

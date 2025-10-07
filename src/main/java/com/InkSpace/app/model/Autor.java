@@ -1,12 +1,12 @@
 package com.InkSpace.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.InkSpace.app.model.Livro;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,13 @@ public class Autor {
 	private String sobrenome;
 
 	@ManyToMany(mappedBy = "autores")
-	@JsonIgnoreProperties("autores")
+//	@JsonBackReference
+	@JsonIgnoreProperties
 	private Set<Livro> livros = new HashSet<>();
+
+	public Autor(String nome, String sobrenome) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+	}
+
 }
