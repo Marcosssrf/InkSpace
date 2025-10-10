@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Livros</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
@@ -15,7 +16,11 @@
     <nav class="header-nav">
         <a th:href="@{/livros/lista}">Livros</a>
         <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
     </nav>
 </header>
 
@@ -59,14 +64,17 @@
                     <td th:text="${#temporals.format(livro.dataPublicacao, 'yyyy')}">1899</td>
                     <td th:text="${livro.copias}">10</td>
                     <td>
-                        <a th:href="@{/livros/editar/{id}(id=${livro.id})}" class="action-link">
-                            Editar
-                        </a>
-
+                        <a th:href="@{/livros/editar/{id}(id=${livro.id})}" class="action-link">Editar</a>
                         <a th:href="@{/livros/deletar/{id}(id=${livro.id})}"
                            class="action-link delete"
                            onclick="return confirm('Tem certeza que deseja excluir este livro?');">
                             Excluir
+                        </a>
+
+                        <a th:if="${livro.copias <= 0}"
+                           th:href="@{/reservas/novo/{livroId}(livroId=${livro.id})}"
+                           class="button secondary">
+                            Reservar
                         </a>
                     </td>
                 </tr>
@@ -81,7 +89,7 @@
 </main>
 
 <footer class="page-footer">
-    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+    <p>&copy; 2025 InkSpace</p>
 </footer>
 
 </body>

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Categoria</title>
+    <title>Confirmar Reserva</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
@@ -26,17 +25,24 @@
 
 <main class="container">
     <div class="form-container">
-        <h1>Cadastrar Nova Categoria</h1>
+        <h1>Confirmar Reserva</h1>
+        <p>Você está reservando o livro: <strong th:text="${livro.titulo}"></strong></p>
 
-        <form th:action="@{/categorias/salvar}" th:object="${categoria}" method="post">
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
 
-            <input type="hidden" th:field="*{id}" />
+        <form th:action="@{/reservas/criar}" method="post">
+            <input type="hidden" name="livroId" th:value="${livro.id}">
 
-            <label for="nomeCategoria">Nome da Categoria:</label>
-            <input type="text" th:field="*{nomeCategoria}" required>
-            <span th:if="${#fields.hasErrors('nomeCategoria')}" th:errors="*{nomeCategoria}" class="error-message"></span>
+            <label for="membroId">Selecione seu nome:</label>
+            <select id="membroId" name="membroId" required>
+                <option value="">-- Selecione o membro --</option>
+                <option th:each="membro : ${todosOsMembros}"
+                        th:value="${membro.id}"
+                        th:text="${membro.nome} + ' ' + ${membro.sobrenome}">
+                </option>
+            </select>
 
-            <button type="submit">Salvar Categoria</button>
+            <button type="submit">Confirmar Reserva</button>
         </form>
     </div>
 </main>
@@ -44,6 +50,5 @@
 <footer class="page-footer">
     <p>&copy; 2025 InkSpace</p>
 </footer>
-
 </body>
 </html>

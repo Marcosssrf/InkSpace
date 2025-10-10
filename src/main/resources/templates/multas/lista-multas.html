@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Multas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="list-card">
+        <div class="list-header">
+            <h1>Gerenciamento de Multas</h1>
+        </div>
+
+        <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <div th:if="${!multas.isEmpty()}">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>ID Multa</th>
+                    <th>Livro</th>
+                    <th>Membro</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="multa : ${multas}">
+                    <td th:text="${multa.id}"></td>
+                    <td th:text="${multa.emprestimo.livro.titulo}"></td>
+                    <td th:text="${multa.emprestimo.membro.nome} + ' ' + ${multa.emprestimo.membro.sobrenome}"></td>
+                    <td th:text="${#numbers.formatCurrency(multa.valorMulta)}"></td>
+                    <td>
+                                <span th:text="${multa.status.name()}"
+                                      th:classappend="${multa.status.name() == 'PAGA'} ? 'status-devolvido' : 'status-atrasado'">
+                                </span>
+                    </td>
+                    <td>
+                        <form th:if="${multa.status.name() == 'PENDENTE'}" th:action="@{/multas/pagar/{id}(id=${multa.id})}" method="post">
+                            <button type="submit" class="button secondary" onclick="return confirm('Confirmar o pagamento desta multa?');">
+                                Pagar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${multas.isEmpty()}">
+            <p class="empty-message">Nenhuma multa registrada no sistema.</p>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
+</footer>
+</body>
+</html>

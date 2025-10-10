@@ -3,69 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InkSpace</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>InkSpace - Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/index-style.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
-<header class="main-header">
-    <div class="logo-container">
-        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca" class="main-logo">
-    </div>
-    <h1 class="welcome-title">Bem-vindo a InkSpace</h1>
-    <p class="welcome-subtitle">Selecione uma opção para gerenciar:</p>
-</header>
+<div class="index-container">
+    <header class="index-header">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca" class="index-logo">
+        <h1>InkSpace</h1>
+        <p>Sistema de Gerenciamento de Biblioteca</p>
+    </header>
 
-<main class="dashboard-container">
-    <div class="dashboard-card">
-        <span class="card-icon">📚</span>
-        <h2>Livros</h2>
-        <div class="card-actions">
-            <a th:href="@{/livros/lista}" class="button card-button">Ver Lista</a>
-            <a th:href="@{/livros/novo}" class="button card-button secondary">Cadastrar Novo</a>
-        </div>
-    </div>
+    <main class="index-grid">
+        <a th:href="@{/livros/lista}" class="grid-item">
+            <div class="item-icon">📚</div>
+            <div class="item-text">
+                <h3>Livros</h3>
+                <p>Consultar e gerenciar o acervo</p>
+            </div>
+        </a>
 
-    <div class="dashboard-card">
-        <span class="card-icon">🧑‍🤝‍🧑</span>
-        <h2>Membros</h2>
-        <div class="card-actions">
-            <a th:href="@{/membros/lista}" class="button card-button">Ver Lista</a>
-            <a th:href="@{/membros/novo}" class="button card-button secondary">Cadastrar Novo</a>
-        </div>
-    </div>
+        <a th:href="@{/membros/lista}" class="grid-item">
+            <div class="item-icon">🧑‍🤝‍🧑</div>
+            <div class="item-text">
+                <h3>Membros</h3>
+                <p>Administrar leitores e seus status</p>
+            </div>
+        </a>
 
-    <div class="dashboard-card">
-        <span class="card-icon">✍️</span>
-        <h2>Autores</h2>
-        <div class="card-actions">
-            <a th:href="@{/autores/lista}" class="button card-button">Ver Lista</a>
-            <a th:href="@{/autores/novo}" class="button card-button secondary">Cadastrar Novo</a>
-        </div>
-    </div>
+        <a th:href="@{/autores/lista}" class="grid-item">
+            <div class="item-icon">✍️</div>
+            <div class="item-text">
+                <h3>Autores</h3>
+                <p>Visualizar e cadastrar autores</p>
+            </div>
+        </a>
 
-    <div class="dashboard-card">
-        <span class="card-icon">🏷️</span>
-        <h2>Categorias</h2>
-        <div class="card-actions">
-            <a th:href="@{/categorias/lista}" class="button card-button">Ver Lista</a>
-            <a th:href="@{/categorias/novo}" class="button card-button secondary">Cadastrar Novo</a>
-        </div>
-    </div>
+        <a th:href="@{/categorias/lista}" class="grid-item">
+            <div class="item-icon">🏷️</div>
+            <div class="item-text">
+                <h3>Categorias</h3>
+                <p>Organizar os gêneros literários</p>
+            </div>
+        </a>
 
-    <div class="dashboard-card">
-        <span class="card-icon"> 📤 </span>
-        <h2>Empréstimos</h2>
-        <div class="card-actions">
-            <a th:href="@{/emprestimos/lista}" class="button card-button">Ver Lista</a>
-            <a th:href="@{/emprestimos/novo}" class="button card-button secondary">Novo Empréstimo</a>
-        </div>
-    </div>
-</main>
+        <a th:href="@{/emprestimos/lista}" class="grid-item">
+            <div class="item-icon">🔄</div>
+            <div class="item-text">
+                <h3>Empréstimos</h3>
+                <p>Controlar retiradas e devoluções</p>
+            </div>
+        </a>
 
-<footer class="main-footer">
-    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
-</footer>
+        <a th:href="@{/reservas/lista}" class="grid-item">
+            <div class="item-icon">🔖</div>
+            <div class="item-text">
+                <h3>Reservas</h3>
+                <p>Gerenciar a fila de espera</p>
+            </div>
+        </a>
+
+        <a th:href="@{/multas/lista}" class="grid-item">
+            <div class="item-icon">💰</div>
+            <div class="item-text">
+                <h3>Multas</h3>
+                <p>Administrar multas e pagamentos</p>
+            </div>
+        </a>
+    </main>
+</div>
 
 </body>
 </html>

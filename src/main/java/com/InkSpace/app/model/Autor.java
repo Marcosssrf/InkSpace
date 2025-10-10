@@ -26,7 +26,6 @@ public class Autor {
 	private String sobrenome;
 
 	@ManyToMany(mappedBy = "autores")
-//	@JsonBackReference
 	@JsonIgnoreProperties
 	private Set<Livro> livros = new HashSet<>();
 

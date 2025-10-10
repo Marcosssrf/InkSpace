@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Autor</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
 <header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
+    </nav>
 </header>
 
 <main class="container">
@@ -33,6 +46,7 @@
 </main>
 
 <footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
 </footer>
 
 </body>

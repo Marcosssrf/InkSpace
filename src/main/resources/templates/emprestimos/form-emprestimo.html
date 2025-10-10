@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Empréstimo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="form-container">
+        <h1>Registrar Novo Empréstimo</h1>
+
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <form th:action="@{/emprestimos/salvar}" th:object="${emprestimoDto}" method="post">
+
+            <label for="livroId">Selecione o Livro:</label>
+            <select id="livroId" th:field="*{livroId}" required class="select2-lazy-load">
+                <option value="">-- Busque e selecione um livro --</option>
+                <option th:each="livro : ${livrosDisponiveis}"
+                        th:value="${livro.id}"
+                        th:text="${livro.titulo} + ' (' + ${livro.copias} + ' disponíveis)'">
+                </option>
+            </select>
+            <small>Apenas livros com estoque são exibidos.</small>
+
+            <label for="membroId">Selecione o Membro:</label>
+            <select id="membroId" th:field="*{membroId}" required class="select2-lazy-load">
+                <option value="">-- Busque e selecione um membro --</option>
+                <option th:each="membro : ${todosOsMembros}"
+                        th:value="${membro.id}"
+                        th:text="${membro.nome} + ' ' + ${membro.sobrenome}">
+                </option>
+            </select>
+            <small>Busque pelo nome do membro.</small>
+
+            <button type="submit">Realizar Empréstimo</button>
+        </form>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#livroId, #membroId').select2({
+            placeholder: "Busque aqui...",
+            allowClear: true
+        });
+        $('.select2-lazy-load').css('visibility', 'visible');
+    });
+</script>
+</body>
+</html>

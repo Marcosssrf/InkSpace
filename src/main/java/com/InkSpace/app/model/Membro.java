@@ -22,6 +22,9 @@ public class Membro {
 	private String nome;
 	private String sobrenome;
 	private LocalDate dataEntrada;
-	private Integer statusId;
+	@ManyToOne
+	@JoinColumn(name = "status_id", nullable = false)
+	private StatusMembro status;
+
 
 }

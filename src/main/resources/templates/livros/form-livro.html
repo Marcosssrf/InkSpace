@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Livro</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -16,7 +17,11 @@
     <nav class="header-nav">
         <a th:href="@{/livros/lista}">Livros</a>
         <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
     </nav>
 </header>
 
@@ -66,7 +71,7 @@
 </main>
 
 <footer class="page-footer">
-    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+    <p>&copy; 2025 InkSpace</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

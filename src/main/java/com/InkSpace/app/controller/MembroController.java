@@ -1,6 +1,7 @@
 package com.InkSpace.app.controller;
 
 import com.InkSpace.app.model.Membro;
+import com.InkSpace.app.repository.StatusMembroRepository;
 import com.InkSpace.app.service.MembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,13 @@ public class MembroController {
 
 	@Autowired
 	private MembroService membroService;
+	@Autowired
+	private StatusMembroRepository statusMembroRepository;
 
 	@GetMapping("/novo")
 	public String mostrarFormularioDeCadastro(Model model) {
 		model.addAttribute("membro", new Membro());
+		model.addAttribute("todosOsStatus", statusMembroRepository.findAll());
 		return "membros/form-membro";
 	}
 
@@ -45,9 +49,9 @@ public class MembroController {
 	@GetMapping("/editar/{id}")
 	public String mostrarFormularioDeEdicao(@PathVariable Integer id, Model model) {
 		Optional<Membro> membroOptional = membroService.findById(id);
-
 		if (membroOptional.isPresent()) {
 			model.addAttribute("membro", membroOptional.get());
+			model.addAttribute("todosOsStatus", statusMembroRepository.findAll());
 			return "membros/form-membro";
 		}
 		return "redirect:/membros/lista";

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Empréstimos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="list-card">
+        <div class="list-header">
+            <h1>Histórico de Empréstimos</h1>
+            <a th:href="@{/emprestimos/novo}" class="button primary">Novo Empréstimo</a>
+        </div>
+
+        <form th:action="@{/emprestimos/lista}" method="get" class="filter-box">
+            <select name="membroId" id="filtroMembro" class="select2-lazy-load">
+                <option value=""></option>
+                <option th:each="membro : ${todosOsMembros}"
+                        th:value="${membro.id}"
+                        th:text="${membro.nome} + ' ' + ${membro.sobrenome}"
+                        th:selected="${membro.id == membroIdSelecionado}">
+                </option>
+            </select>
+            <div class="filter-actions">
+                <button type="submit" class="button primary">Filtrar</button>
+                <a th:href="@{/emprestimos/lista}" class="button secondary">Limpar</a>
+            </div>
+        </form>
+
+        <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <div th:if="${!emprestimos.isEmpty()}">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Membro</th>
+                    <th>Data Empréstimo</th>
+                    <th>Data Limite</th>
+                    <th>Data Devolução</th>
+                    <th>Status</th>
+                    <th>Multa</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="emprestimo : ${emprestimos}">
+                    <td th:text="${emprestimo.livro.titulo}"></td>
+                    <td th:text="${emprestimo.membro.nome} + ' ' + ${emprestimo.membro.sobrenome}"></td>
+                    <td th:text="${#temporals.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(emprestimo.dataPrevistaDevolucao, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${emprestimo.dataDevolucao != null} ? ${#temporals.format(emprestimo.dataDevolucao, 'dd/MM/yyyy')} : '---'"></td>
+                    <td>
+                                <span th:if="${emprestimo.dataDevolucao == null}">
+                                    <span th:if="${emprestimo.dataPrevistaDevolucao.isBefore(T(java.time.LocalDate).now())}" class="status-atrasado">Atrasado</span>
+                                    <span th:unless="${emprestimo.dataPrevistaDevolucao.isBefore(T(java.time.LocalDate).now())}" class="status-emprestado">Em Andamento</span>
+                                </span>
+                        <span th:if="${emprestimo.dataDevolucao != null}" class="status-devolvido">Devolvido</span>
+                    </td>
+                    <td>
+                        <span th:if="${emprestimo.multa != null}" class="status-atrasado" th:text="${#numbers.formatCurrency(emprestimo.multa.valorMulta)}"></span>
+                        <span th:if="${emprestimo.multa == null}">---</span>
+                    </td>
+                    <td>
+                        <a th:if="${emprestimo.dataDevolucao == null}"
+                           th:href="@{/emprestimos/devolver/{id}(id=${emprestimo.id})}"
+                           class="button secondary"
+                           onclick="return confirm('Confirmar a devolução deste livro?');">
+                            Devolver
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${emprestimos.isEmpty()}">
+            <p class="empty-message">Nenhum empréstimo encontrado.</p>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#filtroMembro').select2({
+            placeholder: "Filtre por membro",
+            allowClear: true
+        });
+        $('.select2-lazy-load').css('visibility', 'visible');
+    });
+</script>
+</body>
+</html>

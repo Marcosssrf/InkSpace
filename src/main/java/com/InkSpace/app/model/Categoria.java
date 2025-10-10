@@ -21,11 +21,10 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name="nome_categoria")
+	@Column(name="nome_categoria", nullable=false)
 	private String nomeCategoria;
 
 	@ManyToMany(mappedBy = "categorias")
-//	@JsonBackReference
 	@JsonIgnoreProperties("categorias")
 	private Set<Livro> livros = new HashSet<>();
 

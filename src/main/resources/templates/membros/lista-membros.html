@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Membros</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
@@ -15,7 +16,11 @@
     <nav class="header-nav">
         <a th:href="@{/livros/lista}">Livros</a>
         <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
     </nav>
 </header>
 
@@ -43,7 +48,7 @@
                     <td th:text="${membro.nome}">João</td>
                     <td th:text="${membro.sobrenome}">Silva</td>
                     <td th:text="${#temporals.format(membro.dataEntrada, 'dd/MM/yyyy')}">01/01/2025</td>
-                    <td th:text="${membro.statusId}">Ativo</td>
+                    <td th:text="${membro.status.valorStatus}">Ativo</td>
                     <td>
                         <a th:href="@{/membros/editar/{id}(id=${membro.id})}" class="action-link">
                             Editar
@@ -67,7 +72,7 @@
 </main>
 
 <footer class="page-footer">
-    <p>&copy; 2025 InkSpace - Sua Biblioteca Digital.</p>
+    <p>&copy; 2025 InkSpace</p>
 </footer>
 
 </body>

@@ -31,13 +31,11 @@ public class Livro {
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable()
-//	@JsonManagedReference
 	@JsonIgnoreProperties("livros")
 	private Set<Autor> autores = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable()
-//	@JsonManagedReference
 	@JsonIgnoreProperties("livros")
 	private Set<Categoria> categorias = new HashSet<>();
 

@@ -1,8 +1,8 @@
 /* ==========================================================================
-   1. ESTILOS GLOBAIS E DE BASE
+   1. ESTILOS GLOBAIS E DE BASE (TEMA ESCURO)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -11,8 +11,8 @@
 }
 
 body {
-    background-color: #faf3e0;
-    color: #352d2d;
+    background-color: #1c1c1e;
+    color: #e0e0e0;
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     min-height: 100vh;
@@ -21,17 +21,22 @@ body {
 }
 
 h1, h2, h3 {
-    color: #352d2d;
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 a {
     text-decoration: none;
-    color: #8a6d59;
+    color: #d4af37;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #f0e68c;
 }
 
 /* ==========================================================================
-   2. LAYOUT PRINCIPAL (Header, Main, Footer, Container)
+   2. LAYOUT PRINCIPAL (HEADER, MAIN, FOOTER, CONTAINER)
    ========================================================================== */
 
 .container {
@@ -44,109 +49,54 @@ a {
 
 .page-header, .page-footer {
     width: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: #2a2a2c;
+    border-bottom: 1px solid #3a3a3c;
     padding: 15px 30px;
+}
+.page-footer {
+    border-bottom: none;
+    border-top: 1px solid #3a3a3c;
 }
 
 .page-header { display: flex; justify-content: space-between; align-items: center; }
 .header-logo img { max-height: 50px; }
-.header-nav a { margin-left: 20px; font-weight: 500; transition: color 0.2s; }
-.header-nav a:hover { color: #352d2d; }
+.header-nav a { margin-left: 20px; font-weight: 500; color: #c0c0c0; }
+.header-nav a:hover { color: #fff; }
 
-.page-footer, .main-footer {
-    text-align: center;
-    color: #888;
-    font-size: 0.9em;
-    margin-top: auto;
-    padding: 20px 0;
-}
+.page-footer { text-align: center; color: #888; font-size: 0.9em; margin-top: auto; }
 
 /* ==========================================================================
    3. PÁGINA INDEX (Dashboard)
    ========================================================================== */
 
-.main-header {
-    text-align: center;
-    padding: 40px 20px 20px 20px;
-}
-
-.main-logo {
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.welcome-title {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    color: #8a6d59;
-}
-
-.welcome-subtitle {
-    font-size: 1.1em;
-    color: #5a4a4a;
-    margin-bottom: 30px;
-}
-
-.dashboard-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    flex-grow: 1;
-}
-
+.main-header { text-align: center; padding: 40px 20px 20px 20px; }
+.main-logo { max-width: 120px; height: auto; margin-bottom: 20px; filter: invert(0.8); }
+.welcome-title { font-size: 2.8em; margin-bottom: 10px; color: #d4af37; }
+.welcome-subtitle { font-size: 1.2em; color: #a0a0a0; }
+.dashboard-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; width: 100%; max-width: 1300px; margin: 0 auto; flex-grow: 1;}
 .dashboard-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    width: 280px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background-color: #2a2a2c; border: 1px solid #3a3a3c; border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); padding: 30px; text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex; flex-direction: column;
 }
+.dashboard-card:hover { transform: translateY(-10px); border-color: #d4af37; }
+.card-icon { font-size: 3.5em; line-height: 1; margin-bottom: 15px; color: #d4af37; }
+.dashboard-card h2 { font-size: 1.6em; margin-bottom: 15px; }
+.card-description { font-size: 0.95em; color: #a0a0a0; flex-grow: 1; margin-bottom: 25px; }
+.card-actions { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.main-footer { text-align: center; color: #888; font-size: 0.9em; padding: 40px 20px 20px 20px; }
 
-.dashboard-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-.card-icon {
-    font-size: 3.5em;
-    margin-bottom: 15px;
-    line-height: 1;
-}
-
-.dashboard-card h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-}
-
-.card-actions {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 /* ==========================================================================
    4. FORMULÁRIOS
    ========================================================================== */
 
 .form-container {
-    background: #fff;
+    background: #2a2a2c;
     padding: 30px 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #3a3a3c;
     margin: 20px auto;
     max-width: 600px;
 }
@@ -154,39 +104,59 @@ a {
 .form-container h1 {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
+    color: #c0c0c0;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="number"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 1px solid #555;
     border-radius: 8px;
-    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    color: #352d2d;
-    background-color: #fdfaf3;
+    color: #e0e0e0;
+    background-color: #1c1c1e;
+    font-size: 1em;
 }
 
-input:focus {
-    border-color: #b68973;
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
+    background-color: #1c1c1e;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23d4af37%22%20d%3D%27M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%27/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: .65em auto;
+}
+
+input:focus,
+select:focus {
+    border-color: #d4af37;
     outline: none;
-    box-shadow: 0 0 5px rgba(182, 137, 115, 0.5);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 form small {
     display: block;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin-top: -20px;
+    margin-bottom: 25px;
     font-size: 0.8em;
     color: #888;
 }
@@ -196,135 +166,83 @@ button[type="submit"] {
     padding: 15px;
     border: none;
     border-radius: 8px;
-    background-color: #8a6d59;
-    color: white;
+    background-color: #d4af37;
+    color: #1c1c1e;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #6d5645;
+    background-color: #f0e68c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
 }
 
 .error-message {
-    color: #c0392b;
+    color: #e57373;
     font-size: 0.9em;
     display: block;
-    margin-top: -15px;
-    margin-bottom: 15px;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
-
 /* ==========================================================================
-   5. TABELAS (Páginas de Lista)
+   5. TABELAS E PÁGINAS DE LISTA
    ========================================================================== */
 
 .list-card {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    background: #2a2a2c; padding: 30px 40px; border-radius: 12px;
+    border: 1px solid #3a3a3c; margin-top: 20px;
 }
-
-.list-header {
-    display: flex;
+.list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; }
+.list-header h1 { margin: 0; color: #fff; }
+.filter-box {
+    display: flex; align-items: center; gap: 15px; padding: 20px;
+    background-color: #1c1c1e; border-radius: 8px; margin-bottom: 25px; border: 1px solid #3a3a3c;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
 }
-
-.list-header h1 {
-    margin: 0;
-}
-
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-}
-
-.data-table th,
-.data-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0d8c7;
-}
-
-.data-table thead th {
-    background-color: #f7f2e8;
-    font-weight: 600;
-}
-
-.data-table tbody tr:nth-of-type(even) {
-    background-color: #fdfaf3;
-}
-
-.data-table tbody tr:hover {
-    background-color: #f3eae0;
-}
-
-.action-link {
-    font-weight: 500;
-    margin-right: 15px;
-    transition: opacity 0.2s;
-}
-.action-link:hover { opacity: 0.7; }
-.action-link.delete { color: #c0392b; }
-
-.empty-message {
-    text-align: center;
-    padding: 40px;
-    color: #888;
-}
+.filter-actions { display: flex; gap: 10px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #3a3a3c; }
+.data-table thead th { background-color: #1c1c1e; font-weight: 600; color: #c0c0c0; text-transform: uppercase; letter-spacing: 0.5px; }
+.data-table tbody tr:hover { background-color: #38383a; }
+.action-link { font-weight: 500; margin-right: 15px; transition: color 0.2s; }
+.action-link.delete { color: #e57373; }
+.empty-message { text-align: center; padding: 40px; color: #888; }
 
 /* ==========================================================================
-   6. BOTÕES (Unificados)
+   6. BOTÕES
    ========================================================================== */
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    text-align: center;
+    display: inline-block; padding: 10px 20px; border-radius: 8px; font-weight: 500;
+    transition: all 0.3s ease; border: 2px solid transparent; text-align: center; cursor: pointer;
 }
+.button.primary, .card-button:not(.secondary) { background-color: #d4af37; color: #1c1c1e; font-weight: 600; }
+.button.primary:hover, .card-button:not(.secondary):hover { background-color: #f0e68c; }
 
-.button.primary, .card-button:not(.secondary) {
-    background-color: #8a6d59;
-    color: white;
-}
-.button.primary:hover, .card-button:not(.secondary):hover {
-    background-color: #6d5645;
-}
-
-.button.secondary, .card-button.secondary {
-    background-color: #e0d8c7;
-    color: #6d5645;
-}
-.button.secondary:hover, .card-button.secondary:hover {
-    background-color: #c4b9a9;
-    color: #352d2d;
-}
+.button.secondary, .card-button.secondary { background-color: transparent; color: #d4af37; border-color: #555; }
+.button.secondary:hover, .card-button.secondary:hover { background-color: #3a3a3c; border-color: #d4af37; }
 
 /* ==========================================================================
    7. BIBLIOTECA SELECT2
    ========================================================================== */
 
+.select2-container {
+    width: 100% !important;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
 .select2-container--default .select2-selection--multiple {
     width: 100%;
     padding: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid #555 !important;
     border-radius: 8px;
-    background-color: #fdfaf3;
+    background-color: #1c1c1e !important;
     min-height: 48px;
     box-sizing: border-box;
-    margin-bottom: 5px;
 }
 
 .select2-container--default .select2-search--inline .select2-search__field {
@@ -332,16 +250,17 @@ button[type="submit"]:hover {
     margin-top: 7px;
     border: none;
     outline: none;
+    color: #e0e0e0;
+    background: transparent;
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border-color: #b68973;
+    border-color: #d4af37 !important;
     outline: none;
-    box-shadow: 0 0 5px rgba(182, 137, 115, 0.5);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    max-width: calc(100% - 10px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -349,9 +268,10 @@ button[type="submit"]:hover {
     align-items: center;
     margin-top: 5px !important;
     padding: 3px 5px 3px 10px;
-    background-color: #e0d8c7;
-    border: 1px solid #b68973;
+    background-color: #3a3a3c !important;
+    border: 1px solid #555 !important;
     border-radius: 6px;
+    color: #e0e0e0;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
@@ -360,30 +280,39 @@ button[type="submit"]:hover {
     flex-shrink: 0;
     font-size: 1.2em;
     font-weight: bold;
-    color: #8a6d59;
+    color: #a0a0a0;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    color: #352d2d;
+    color: #fff;
 }
 
 .select2-dropdown {
-    border: 1px solid #b68973;
+    border: 1px solid #3a3a3c !important;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #2a2a2c !important;
+    color: #e0e0e0;
 }
 
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #e0d8c7;
-    color: #352d2d;
+    background-color: #3a3a3c !important;
+    color: #fff;
 }
 
 .select2-container--default .select2-results__option--selected {
-    background-color: #d4c7b8;
+    background-color: #1c1c1e !important;
 }
-.select2-container {
-    width: 100% !important;
-    box-sizing: border-box;
-}
+/* ==========================================================================
+   8. UTILIDADES (Alertas e Status)
+   ========================================================================== */
+
+.alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; text-align: center; border: 1px solid; }
+.alert-success { background-color: #1e4620; color: #a3d9a5; border-color: #2e6b2e; }
+.alert-danger { background-color: #58151c; color: #f8b4b7; border-color: #842029; }
+
+.status-emprestado, .status-atrasado, .status-devolvido { padding: 3px 8px; border-radius: 5px; font-weight: 500; font-size: 0.9em; }
+.status-emprestado { background-color: #0d6efd40; color: #a9d2ff; }
+.status-devolvido { background-color: #19875440; color: #a3cfbb; }
+.status-atrasado { background-color: #ffc10740; color: #ffe187; }
