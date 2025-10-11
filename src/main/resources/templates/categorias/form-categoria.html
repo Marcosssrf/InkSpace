@@ -21,12 +21,13 @@
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
         <a th:href="@{/reservas/lista}">Reservas</a>
         <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
     </nav>
 </header>
 
 <main class="container">
     <div class="form-container">
-        <h1>Cadastrar Nova Categoria</h1>
+        <h1 th:text="${categoria.id == null} ? 'Cadastrar Nova Categoria' : 'Editar Categoria'"></h1>
 
         <form th:action="@{/categorias/salvar}" th:object="${categoria}" method="post">
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InkSpace - Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/index-style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.ico}">
 </head>
 <body>
@@ -72,8 +72,19 @@
                 <p>Administrar multas e pagamentos</p>
             </div>
         </a>
+
+        <a th:href="@{/relatorios}" class="grid-item">
+            <div class="item-icon">📊</div>
+            <div class="item-text">
+                <h3>Relatórios</h3>
+                <p>Ver estatísticas e dados de uso</p>
+            </div>
+        </a>
+
     </main>
 </div>
-
 </body>
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
+</footer>
 </html>

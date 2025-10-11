@@ -21,6 +21,7 @@
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
         <a th:href="@{/reservas/lista}">Reservas</a>
         <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
     </nav>
 </header>
 
@@ -44,7 +45,7 @@
 
             <label for="membroId">Selecione o Membro:</label>
             <select id="membroId" th:field="*{membroId}" required class="select2-lazy-load">
-                <option value="">-- Busque e selecione um membro --</option>
+                <option value="">Busque e selecione um membro</option>
                 <option th:each="membro : ${todosOsMembros}"
                         th:value="${membro.id}"
                         th:text="${membro.nome} + ' ' + ${membro.sobrenome}">

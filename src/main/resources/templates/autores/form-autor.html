@@ -21,12 +21,13 @@
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
         <a th:href="@{/reservas/lista}">Reservas</a>
         <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
     </nav>
 </header>
 
 <main class="container">
     <div class="form-container">
-        <h1>Cadastrar Novo Autor</h1>
+        <h1 th:text="${autor.id == null} ? 'Cadastrar Novo Autor' : 'Editar Autor'"></h1>
 
         <form th:action="@{/autores/salvar}" th:object="${autor}" method="post">
 

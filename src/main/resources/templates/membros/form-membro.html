@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Membro</title>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="shortcut icon" type="imagex/png" th:href="@{/img/logo.ico}">
 </head>
 <body>
 
@@ -22,12 +20,13 @@
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
         <a th:href="@{/reservas/lista}">Reservas</a>
         <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
     </nav>
 </header>
 
 <main class="container">
     <div class="form-container">
-        <h1>Cadastrar Novo Membro</h1>
+        <h1 th:text="${membro.id == null} ? 'Cadastrar Novo Membro' : 'Editar Membro'"></h1>
 
         <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
 
@@ -47,7 +46,7 @@
             <span th:if="${#fields.hasErrors('dataEntrada')}" th:errors="*{dataEntrada}" class="error-message"></span>
 
             <label for="status">Status:</label>
-            <select th:field="*{status}" required class="select2-lazy-load">
+            <select th:field="*{status}" required>
                 <option value="">Selecione um Status</option>
                 <option th:each="st : ${todosOsStatus}"
                         th:value="${st.id}"

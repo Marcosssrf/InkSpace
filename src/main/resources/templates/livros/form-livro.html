@@ -22,12 +22,13 @@
         <a th:href="@{/emprestimos/lista}">Empréstimos</a>
         <a th:href="@{/reservas/lista}">Reservas</a>
         <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
     </nav>
 </header>
 
 <main class="container">
     <div class="form-container">
-        <h1>Cadastrar Novo Livro</h1>
+        <h1 th:text="${livro.id == null} ? 'Cadastrar Novo Livro' : 'Editar Livro'"></h1>
 
         <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
 

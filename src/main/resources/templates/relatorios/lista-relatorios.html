@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - InkSpace</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.ico}">
+</head>
+<body>
+<header class="page-header">
+    <a th:href="@{/}" class="header-logo">
+        <img th:src="@{/img/logo.png}" alt="Logo da Biblioteca">
+    </a>
+    <nav class="header-nav">
+        <a th:href="@{/livros/lista}">Livros</a>
+        <a th:href="@{/membros/lista}">Membros</a>
+        <a th:href="@{/autores/lista}">Autores</a>
+        <a th:href="@{/categorias/lista}">Categorias</a>
+        <a th:href="@{/emprestimos/lista}">Empréstimos</a>
+        <a th:href="@{/reservas/lista}">Reservas</a>
+        <a th:href="@{/multas/lista}">Multas</a>
+        <a th:href="@{/relatorios}">Relatórios</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="list-card">
+        <div class="list-header">
+            <h1>Painel de Relatórios</h1>
+        </div>
+
+        <div class="report-section">
+            <h2>Top 10 Livros Mais Emprestados</h2>
+            <div th:if="${!topLivros.isEmpty()}">
+                <table class="data-table">
+                    <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Título do Livro</th>
+                        <th>Total de Empréstimos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="estatistica, iterStat : ${topLivros}">
+                        <td th:text="${iterStat.count}" style="text-align: center; width: 10%;">1</td>
+                        <td th:text="${estatistica.livro.titulo}">Dom Casmurro</td>
+                        <td th:text="${estatistica.totalEmprestimos}" style="text-align: center; width: 20%;">150</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${topLivros.isEmpty()}">
+                <p class="empty-message">Ainda não há dados de empréstimos para gerar este relatório.</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="page-footer">
+    <p>&copy; 2025 InkSpace</p>
+</footer>
+
+</body>
+</html>

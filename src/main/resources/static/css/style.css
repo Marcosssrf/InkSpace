@@ -2,6 +2,11 @@
    1. ESTILOS GLOBAIS E DE BASE (TEMA ESCURO)
    ========================================================================== */
 
+/* Importa a fonte do Google Fonts */
+/* ==========================================================================
+   1. ESTILOS GLOBAIS E DE BASE (TEMA ESCURO UNIFICADO)
+   ========================================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
@@ -36,7 +41,7 @@ a:hover {
 }
 
 /* ==========================================================================
-   2. LAYOUT PRINCIPAL (HEADER, MAIN, FOOTER, CONTAINER)
+   2. LAYOUT PRINCIPAL E CONTAINERS
    ========================================================================== */
 
 .container {
@@ -47,46 +52,129 @@ a:hover {
     flex-grow: 1;
 }
 
-.page-header, .page-footer {
+/* Cabeçalho e Rodapé para páginas INTERNAS */
+.page-header {
     width: 100%;
     background-color: #2a2a2c;
     border-bottom: 1px solid #3a3a3c;
     padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.page-footer {
-    border-bottom: none;
+.header-logo img {
+    max-height: 50px;
+    filter: brightness(0.9);
+}
+.header-nav a {
+    margin-left: 20px;
+    font-weight: 500;
+    color: #c0c0c0;
+}
+.header-nav a:hover { color: #fff; }
+
+.page-footer, .main-footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+    margin-top: auto;
+    padding: 20px 0;
+    width: 100%;
+    background-color: #1c1c1e;
     border-top: 1px solid #3a3a3c;
 }
 
-.page-header { display: flex; justify-content: space-between; align-items: center; }
-.header-logo img { max-height: 50px; }
-.header-nav a { margin-left: 20px; font-weight: 500; color: #c0c0c0; }
-.header-nav a:hover { color: #fff; }
-
-.page-footer { text-align: center; color: #888; font-size: 0.9em; margin-top: auto; }
-
 /* ==========================================================================
-   3. PÁGINA INDEX (Dashboard)
+   3. PÁGINA INDEX (Dashboard) - ESTILOS DO SEU 'index-style.css'
    ========================================================================== */
 
-.main-header { text-align: center; padding: 40px 20px 20px 20px; }
-.main-logo { max-width: 120px; height: auto; margin-bottom: 20px; filter: invert(0.8); }
-.welcome-title { font-size: 2.8em; margin-bottom: 10px; color: #d4af37; }
-.welcome-subtitle { font-size: 1.2em; color: #a0a0a0; }
-.dashboard-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; width: 100%; max-width: 1300px; margin: 0 auto; flex-grow: 1;}
-.dashboard-card {
-    background-color: #2a2a2c; border: 1px solid #3a3a3c; border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); padding: 30px; text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    display: flex; flex-direction: column;
+.index-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
 }
-.dashboard-card:hover { transform: translateY(-10px); border-color: #d4af37; }
-.card-icon { font-size: 3.5em; line-height: 1; margin-bottom: 15px; color: #d4af37; }
-.dashboard-card h2 { font-size: 1.6em; margin-bottom: 15px; }
-.card-description { font-size: 0.95em; color: #a0a0a0; flex-grow: 1; margin-bottom: 25px; }
-.card-actions { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
-.main-footer { text-align: center; color: #888; font-size: 0.9em; padding: 40px 20px 20px 20px; }
 
+.index-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.index-logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.index-header h1 {
+    font-size: 3em;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.index-header p {
+    font-size: 1.1em;
+    font-weight: 300;
+    color: #a0a0a0;
+}
+
+.index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.grid-item {
+    background-color: #2a2a2c;
+    border: 1px solid #3a3a3c;
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-8px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.item-icon {
+    font-size: 2.5em;
+    margin-right: 20px;
+    color: #d4af37;
+}
+
+.item-text h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 5px;
+}
+
+.item-text p {
+    font-size: 0.9em;
+    color: #a0a0a0;
+    line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   4. FORMULÁRIOS (TEMA ESCURO)
+   ========================================================================== */
+
+/* ... (O restante do CSS para Formulários, Tabelas, Select2, etc. está no arquivo que você já tem) ... */
+/* Se precisar que eu envie novamente as seções 4, 5, 6, 7 e 8, me avise! */
 
 /* ==========================================================================
    4. FORMULÁRIOS
@@ -114,6 +202,7 @@ label {
     color: #c0c0c0;
 }
 
+/* Seletor unificado para inputs de texto */
 input[type="text"],
 input[type="date"],
 input[type="number"] {
@@ -128,6 +217,7 @@ input[type="number"] {
     font-size: 1em;
 }
 
+/* Estilo SEPARADO e explícito para o <select> de Status */
 select {
     width: 100%;
     padding: 12px 15px;
@@ -233,14 +323,14 @@ button[type="submit"]:hover {
 .select2-container {
     width: 100% !important;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Aumentado para dar o mesmo espaço dos outros inputs */
 }
 .select2-container--default .select2-selection--multiple {
     width: 100%;
     padding: 6px;
     border: 1px solid #555 !important;
     border-radius: 8px;
-    background-color: #1c1c1e !important;
+    background-color: #1c1c1e !important; /* Força o fundo escuro */
     min-height: 48px;
     box-sizing: border-box;
 }
@@ -268,7 +358,7 @@ button[type="submit"]:hover {
     align-items: center;
     margin-top: 5px !important;
     padding: 3px 5px 3px 10px;
-    background-color: #3a3a3c !important;
+    background-color: #3a3a3c !important; /* Força a cor do item selecionado */
     border: 1px solid #555 !important;
     border-radius: 6px;
     color: #e0e0e0;
@@ -292,7 +382,7 @@ button[type="submit"]:hover {
 .select2-dropdown {
     border: 1px solid #3a3a3c !important;
     border-radius: 8px;
-    background-color: #2a2a2c !important;
+    background-color: #2a2a2c !important; /* Força o fundo do dropdown */
     color: #e0e0e0;
 }
 
@@ -316,3 +406,11 @@ button[type="submit"]:hover {
 .status-emprestado { background-color: #0d6efd40; color: #a9d2ff; }
 .status-devolvido { background-color: #19875440; color: #a3cfbb; }
 .status-atrasado { background-color: #ffc10740; color: #ffe187; }
+
+.report-section {
+    margin-top: 30px;
+}
+.report-section h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
