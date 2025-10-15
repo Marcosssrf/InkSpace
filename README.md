@@ -1,17 +1,22 @@
 # InkSpace - Sistema de Gerenciamento de Biblioteca
 
-InkSpace é um sistema de gerenciamento de biblioteca desenvolvido com Spring Boot. A aplicação permite o controle completo de livros, autores, membros e empréstimos, oferecendo tanto uma interface web para administração quanto uma API REST para integrações externas.
+  Um sistema completo de gerenciamento de biblioteca construído com o ecossistema Spring, oferecendo uma interface web administrativa e uma API RESTful robusta.
 
-Este projeto foi construído como um exercício prático para aprender e aplicar os conceitos do ecossistema Spring, incluindo Spring MVC, Spring Data JPA, Thymeleaf e validação de dados.
+---
 
 ## ✨ Funcionalidades
 
--   **Gerenciamento de Entidades:** CRUD completo para Livros, Autores, Categorias e Membros.
--   **Interface Web:** Páginas administrativas construídas com Thymeleaf para fácil visualização, cadastro, edição e exclusão de dados.
--   **API REST:** Endpoints para todas as entidades, permitindo a integração com outras aplicações (testado com Postman).
--   **Criação em Lote:** Endpoints de API para cadastrar múltiplos autores e categorias de uma só vez, facilitando o povoamento do banco de dados.
--   **Validação:** Regras de validação no back-end para garantir a integridade dos dados (ex: não permitir cópias negativas).
--   **UI Interativa:** Uso de JavaScript e da biblioteca Select2 para melhorar a experiência do usuário nos formulários.
+O InkSpace é uma aplicação full-stack que permite o controle total sobre as operações de uma biblioteca, incluindo:
+
+-   **📚 Gerenciamento de Acervo:** CRUD completo para **Livros**, **Autores** e **Categorias**.
+-   **🧑‍🤝‍🧑 Gestão de Membros:** Cadastro e administração de membros, com controle de status (Ativo, Inativo, etc.).
+-   **🔄 Ciclo de Empréstimos:** Lógica de negócio para realizar empréstimos, com decremento automático do estoque de livros.
+-   **💰 Sistema de Multas:** Geração automática de multas por atraso na devolução, com um painel para visualização e registro de pagamentos.
+-   **🔖 Fila de Reservas:** Permite que membros reservem livros sem estoque. O sistema gerencia a fila e "guarda" o livro para o próximo da fila quando uma cópia é devolvida.
+-   **📊 Painel de Relatórios:** Exibe estatísticas úteis, como o "Top 10 Livros Mais Emprestados".
+-   **🚀 API RESTful:** Endpoints completos para todas as entidades, permitindo integrações e gerenciamento de dados via ferramentas como o Postman. Inclui endpoints para criação em lote (`/batch`).
+-   **🎨 Interface Web Moderna:** Um painel administrativo (Dashboard) e páginas de gerenciamento construídas com Thymeleaf e um design consistente (tema escuro).
+-   **💡 UI Interativa:** Uso de JavaScript e da biblioteca Select2 para criar campos de busca inteligentes nos formulários, melhorando a experiência do usuário.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -26,10 +31,13 @@ Este projeto foi construído como um exercício prático para aprender e aplicar
     -   HTML5 & CSS3
     -   JavaScript (com jQuery e Select2)
 -   **Banco de Dados:**
-    -   MySQL
+    -   MySQL 8+ (para desenvolvimento local)
+    -   PostgreSQL (configurado para produção)
 -   **Build & Dependências:**
     -   Apache Maven
     -   Lombok
+-   **Deploy:**
+    -   Docker
 
 ## 🚀 Como Executar o Projeto
 
@@ -39,83 +47,53 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 -   JDK 21 ou superior
 -   Apache Maven 3.6+
 -   MySQL Server 8.0+
+-   Docker (opcional, para rodar em contêiner)
 -   Uma IDE de sua preferência (IntelliJ, VSCode, etc.)
--   Postman (para testar a API REST)
+-   Postman (para popular o banco e testar a API REST)
 
 ### 2. Configuração do Banco de Dados
 1.  Inicie seu servidor MySQL.
-2.  Crie um novo banco de dados. Exemplo: `CREATE DATABASE biblioteca_db;`
-3.  Abra o arquivo `src/main/resources/application.properties` e configure suas credenciais de acesso ao banco:
+2.  Crie um novo banco de dados. Exemplo: `CREATE DATABASE biblioteca2;`
+3.  O projeto está configurado para usar perfis. Para rodar localmente, você precisa ativar o perfil `dev`.
+    -   **Se usar IntelliJ:** Vá em `Run` -> `Edit Configurations...`, selecione sua aplicação e no campo **"Active profiles"**, digite `dev`.
+    -   O arquivo `src/main/resources/application.yml` já está pré-configurado com as credenciais padrão para o banco `biblioteca2` no localhost. Ajuste o usuário e senha se necessário.
 
-    ```properties
-    # URL de conexão com o banco de dados
-    spring.datasource.url=jdbc:mysql://localhost:3306/biblioteca_db?createDatabaseIfNotExist=true
-
-    # Usuário e senha do seu banco MySQL
-    spring.datasource.username=seu_usuario
-    spring.datasource.password=sua_senha
-
-    # Configurações do Hibernate
-    spring.jpa.hibernate.ddl-auto=update
-    spring.jpa.show-sql=true
-    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-    ```
-
-### 3. Clonar e Executar
+### 3. Executando a Aplicação
 1.  Clone este repositório:
     ```bash
-    git clone [https://github.com/Marcosssrf/InkSpace]
+    git clone [https://github.com/Marcosssrf/InkSpace.git](https://github.com/Marcosssrf/InkSpace.git)
     ```
-2.  Navegue até a pasta do projeto e execute com o Maven:
+2.  Navegue até a pasta do projeto.
+3.  Você pode executar diretamente pela sua IDE ou usando o Maven Wrapper:
     ```bash
-    mvn spring-boot:run
+    ./mvnw spring-boot:run -Dspring.profiles.active=dev
     ```
-3.  A aplicação estará disponível em `http://localhost:8080`.
+4.  A aplicação estará disponível em `http://localhost:8080`.
 
-## 📚 Populando o Banco de Dados (via API)
+## 📚 Populando o Banco de Dados (Obrigatório)
 
-A aplicação iniciará com o banco de dados vazio. Use o Postman para cadastrar os dados iniciais de forma rápida. **A ordem é importante.**
+A aplicação iniciará com o banco de dados vazio. Use o Postman para cadastrar os dados iniciais de forma rápida. **A ordem é muito importante.**
 
-1.  **Cadastre as Categorias:** Envie uma requisição `POST` para `http://localhost:8080/api/categorias/batch` com o JSON das categorias.
-2.  **Cadastre os Autores:** Envie uma requisição `POST` para `http://localhost:8080/api/autores/batch` com o JSON dos autores.
-3.  **Cadastre os Livros:** Envie uma requisição `POST` para `http://localhost:8080/api/livros/batch` com o JSON dos livros.
+1.  **Cadastre os Status:** Insira os dados nas tabelas `status_membro` e `status_reserva` usando os scripts SQL fornecidos no projeto (ou manualmente).
+2.  **Cadastre as Categorias:** Envie uma requisição `POST` para `http://localhost:8080/api/categorias/batch` com o JSON de categorias.
+3.  **Cadastre os Autores:** Envie uma requisição `POST` para `http://localhost:8080/api/autores/batch` com o JSON de autores.
+4.  **Cadastre os Membros:** Use a interface web em `http://localhost:8080/membros/novo` para criar alguns membros.
+5.  **Cadastre os Livros:** Envie uma requisição `POST` para `http://localhost:8080/api/livros/batch` com o JSON de livros.
 
-## 📖 Documentação da API (Endpoints)
+## 📖 Documentação da API (Endpoints Principais)
 
-Use o Postman ou outra ferramenta de sua preferência para interagir com a API.
+**Header Padrão para `POST` e `PUT`:** `Content-Type: application/json`
 
-**Header Padrão para requisições `POST` e `PUT`:** `Content-Type: application/json`
-
----
-### Autores (`/api/autores`)
--   **`POST /api/autores`**: Cria um novo autor.
-    -   **Body:** `{ "nome": "Jorge", "sobrenome": "Amado" }`
--   **`POST /api/autores/batch`**: Cria vários autores.
-    -   **Body:** `[ { "nome": "Autor 1", ... }, { "nome": "Autor 2", ... } ]`
--   **`GET /api/autores`**: Lista todos os autores.
-
----
-### Categorias (`/api/categorias`)
--   **`POST /api/categorias`**: Cria uma nova categoria.
-    -   **Body:** `{ "nomeCategoria": "Suspense" }`
--   **`POST /api/categorias/batch`**: Cria várias categorias.
-    -   **Body:** `[ { "nomeCategoria": "Cat 1" }, { "nomeCategoria": "Cat 2" } ]`
--   **`GET /api/categorias`**: Lista todas as categorias.
-
----
-### Livros (`/api/livros`)
--   **`POST /api/livros`**: Cria um novo livro com suas associações.
-    -   **Body:** (Veja o exemplo complexo de `LivroRequestDTO` que montamos)
--   **`POST /api/livros/batch`**: Cria vários livros.
--   **`GET /api/livros`**: Lista todos os livros.
--   **`GET /api/livros/{id}`**: Busca um livro por ID.
--   **`PUT /api/livros/{id}`**: Atualiza um livro.
--   **`DELETE /api/livros/{id}`**: Deleta um livro.
-
-## 🌐 Acessando a Interface Web
-
--   **Página Inicial:** `http://localhost:8080/`
--   **Livros:** `http://localhost:8080/livros/lista`
--   **Membros:** `http://localhost:8080/membros/lista`
--   **Autores:** `http://localhost:8080/autores/lista`
--   **Categorias:** `http://localhost:8080/categorias/lista`
+| Entidade | Método | URL | Descrição |
+| :--- | :--- | :--- | :--- |
+| **Autores** | `POST` | `/api/autores/batch` | Cria múltiplos autores |
+| | `GET` | `/api/autores` | Lista todos os autores |
+| **Categorias** | `POST` | `/api/categorias/batch`| Cria múltiplas categorias |
+| | `GET` | `/api/categorias` | Lista todas as categorias |
+| **Livros** | `POST` | `/api/livros/batch` | Cria múltiplos livros |
+| | `GET` | `/api/livros` | Lista todos os livros |
+| | `GET` | `/api/livros/{id}` | Busca um livro por ID |
+| | `DELETE`| `/api/livros/{id}` | Deleta um livro |
+| **Empréstimos** | `POST` | `/api/emprestimos` | Realiza um novo empréstimo |
+| | `PUT` | `/api/emprestimos/{id}/devolver` | Registra a devolução de um livro |
+| | `GET` | `/api/emprestimos` | Lista todos os empréstimos |
